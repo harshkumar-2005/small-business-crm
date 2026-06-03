@@ -1,6 +1,6 @@
 import pagination from "../utils/pagination.js";
 import { LeadStatus } from "@prisma/client";
-import { PrismaClient, type Prisma } from "@prisma/client";
+import { PrismaClient, Prisma } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -70,7 +70,7 @@ export const createLeadService = async (
   notes?: string | null,
 ) => {
   try {
-    const existingLead = await prisma.lead.findUnique({
+    const existingLead = await prisma.lead.findFirst({
       where: {
           companyName: companyName
       },
@@ -124,8 +124,8 @@ export const updateLeadStatusService = async (
     return lead;
   } catch (err: unknown) {
     if (
-      error instanceof Prisma.PrismaClientKnownRequestError &&
-      error.code === "P2025"
+      err instanceof Prisma.PrismaClientKnownRequestError &&
+      err.code === "P2025"
     ) {
       throw new Error("Lead not found");
     }
@@ -134,22 +134,21 @@ export const updateLeadStatusService = async (
 };
 
 export const updateLeadDetailService = async (id: string, notes: string | null) => {
-    try {
+  try {
     const lead = await prisma.lead.update({
-        where:{
-            id: id
-        },
-        data:{
-            notes: notes
-        }
+      where: {
+        id: id,
+      },
+      data: {
+        notes: notes,
+      },
     });
 
     return lead;
-    }
   } catch (err: unknown) {
     if (
-      error instanceof Prisma.PrismaClientKnownRequestError &&
-      error.code === "P2025"
+      err instanceof Prisma.PrismaClientKnownRequestError &&
+      err.code === "P2025"
     ) {
       throw new Error("Lead not found");
     }
@@ -159,17 +158,17 @@ export const updateLeadDetailService = async (id: string, notes: string | null) 
 
 export const deleteLeadService = async (id: string) => {
     try{
-        const lead = await prism.lead.delete({
+        const lead = await prisma.lead.delete({
             where:{
                 id: id
             }
         });
 
-        reutrn lead;
+        return lead;
     }catch(err: any){
          if (
-      error instanceof Prisma.PrismaClientKnownRequestError &&
-      error.code === "P2025"
+      err instanceof Prisma.PrismaClientKnownRequestError &&
+      err.code === "P2025"
     ) {
       throw new Error("Lead not found");
     }
