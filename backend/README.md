@@ -1,3 +1,10 @@
+![Node.js](https://img.shields.io/badge/Node.js-22-green)
+![Express](https://img.shields.io/badge/Express-5.x-black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
+![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue)
+![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED)
+
 # Lead Management CRM Backend
 
 A RESTful CRM backend built using Node.js, Express, TypeScript, Prisma ORM, and PostgreSQL.
