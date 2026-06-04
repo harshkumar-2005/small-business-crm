@@ -30,5 +30,7 @@ jobs:
       with:
         context: ./backend
         file: ./backend/Dockerfile
+        build-args: |
+         DATABASE_URL=postgresql://dummy:dummy@localhost:5432/dummy
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/crm-backend:${{ github.sha }}
