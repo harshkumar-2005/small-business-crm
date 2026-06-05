@@ -18,6 +18,6 @@ RUN npx prisma generate
 
 RUN npm run build
 
-EXPOSE 8080
+EXPOSE 3000
 
 CMD ["node", "dist/index.js"]
